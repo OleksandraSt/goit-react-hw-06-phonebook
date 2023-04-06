@@ -30,11 +30,11 @@ export const ContactForm = () => {
             throw new Error("There is no such option");
         }
       };
-      
+
       const handleSubmit = e => {
         e.preventDefault();
         const enterContacts = contacts.some(
-          contact => contact.name.toLowerCase() === name.toLowerCase()
+          contact => contact.name.toLowerCase() === name.toLowerCase() || contact.number === number
         );
         enterContacts
           ? alert(`${name} or ${number} is already in contacts`)
