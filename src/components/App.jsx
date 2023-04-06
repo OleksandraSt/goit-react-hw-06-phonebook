@@ -25,7 +25,7 @@ export const App = () => {
           contacts={filterContacts}
         />
       ) : (
-        alert(`Phonebook is empty`)
+        alert(`There are no matches`)
       )}
     </PhonebookContainer>
   );

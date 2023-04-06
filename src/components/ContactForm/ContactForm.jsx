@@ -12,7 +12,7 @@ export const ContactForm = () => {
     const numberInputId = nanoid();
 
     const dispatch = useDispatch();
-    const contacts = useSelector(addContact);
+    const contacts = useSelector(state => state.contacts);
 
     const handleChange = e => {
         const { name, value } = e.target;
@@ -30,25 +30,16 @@ export const ContactForm = () => {
             throw new Error("There is no such option");
         }
       };
-
+      
       const handleSubmit = e => {
         e.preventDefault();
-        const contact = {
-          id: nanoid(),
-          name,
-          number,
-        };
-        dispatch(addContact(name, number));
-        resetForm();
-
         const enterContacts = contacts.some(
-          contact =>
-            (contact.name === name.toLowerCase() && contact.number === number) ||
-            contact.number === number
+          contact => contact.name.toLowerCase() === name.toLowerCase()
         );
         enterContacts
           ? alert(`${name} or ${number} is already in contacts`)
-          : dispatch(addContact(contact));
+          : dispatch(addContact(name, number));
+        resetForm();
       };
       
       const resetForm = () => {
